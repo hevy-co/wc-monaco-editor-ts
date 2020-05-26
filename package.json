@@ -13,6 +13,7 @@
   ],
   "repository": "https://github.com/hevy-co/wc-monaco-editor-ts/",
   "main": "index.js",
+  "types": "types/wc-monaco-editor.d.ts",
   "scripts": {
     "start": "npx live-server --no-browser --port=5500 --open=dev",
     "lint": "semistandard",

@@ -1,6 +1,5 @@
 const path = require("path");
 
-// Work in somehow: npx tsc -d --declarationDir types --declarationMap --emitDeclarationOnly
 module.exports = {
     mode: "development",
     entry: {
