@@ -2,3 +2,5 @@ node_modules/
 package/
 *.tgz
 dist/
+.cache/
+

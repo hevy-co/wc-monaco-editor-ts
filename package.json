@@ -15,12 +15,12 @@
   "main": "index.js",
   "types": "types/wc-monaco-editor.d.ts",
   "scripts": {
-    "start": "npx live-server --no-browser --port=5500 --open=dev",
-    "lint": "semistandard",
-    "build": "npm run build:main && npm run build:min",
-    "package": "npx rimraf package && npm pack | tail -n 1 | xargs tar -xf",
-    "preversion": "npm run lint",
-    "postversion": "git push --follow-tags"
+    "build": "npm run build-json && npm run build-css && npm run build-html && npm run build-ts && npm run build-worker",
+    "build-json": "parcel build node_modules/monaco-editor/esm/vs/language/json/json.worker.js --no-source-maps",
+    "build-css": "parcel build node_modules/monaco-editor/esm/vs/language/css/css.worker.js --no-source-maps",
+    "build-html": "parcel build node_modules/monaco-editor/esm/vs/language/html/html.worker.js --no-source-maps",
+    "build-ts": "parcel build node_modules/monaco-editor/esm/vs/language/typescript/ts.worker.js --no-source-maps",
+    "build-worker": "parcel build node_modules/monaco-editor/esm/vs/editor/editor.worker.js --no-source-maps"
   },
   "dependencies": {},
   "devDependencies": {
@@ -30,6 +30,7 @@
     "file-loader": "^6.0.0",
     "monaco-editor": "^0.20.0",
     "monaco-editor-webpack-plugin": "^1.9.0",
+    "parcel-bundler": "^1.12.4",
     "rollup-plugin-terser": "^5.2.0",
     "semistandard": "^14.2.0",
     "style-loader": "^1.2.1",

@@ -1,23 +1,23 @@
-import * as monaco from "monaco-editor"
-/* eslint no-undef: 0 */
+// @ts-ignore
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.main.js'
 
 // @ts-ignore
 self.MonacoEnvironment = {
   getWorkerUrl: function (moduleId: any, label: string) {
-    if (label === "json") {
-      return "./json.worker.bundle.js";
+    if (label === 'json') {
+      return './json.worker.js';
     }
-    if (label === "css") {
-      return "./css.worker.bundle.js";
+    if (label === 'css') {
+      return './css.worker.js';
     }
-    if (label === "html") {
-      return "./html.worker.bundle.js";
+    if (label === 'html') {
+      return './html.worker.js';
     }
-    if (label === "typescript" || label === "javascript") {
-      return "./ts.worker.bundle.js";
+    if (label === 'typescript' || label === 'javascript') {
+      return './ts.worker.js';
     }
-    return "./editor.worker.bundle.js";
-  }
+    return './editor.worker.js';
+  },
 };
 
 export class WCMonacoEditor extends HTMLElement {
