@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "module": "ES6",
+        "target": "ES2017",
+        "strict": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "declaration": true,
+        "declarationDir": "types"
+    }
+}
