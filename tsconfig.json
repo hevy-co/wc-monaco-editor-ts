@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "module": "None",
+        "target": "ES2017",
+        "strict": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false,
+        "sourceMap": true,
+        "moduleResolution": "node"
+    }
+}

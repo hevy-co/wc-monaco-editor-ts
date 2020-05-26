@@ -1,62 +1,64 @@
+import * as monaco from "monaco-editor"
 /* eslint no-undef: 0 */
-import '../monaco/editor.main.js';
 
-const monacoDir = new URL('monaco/', import.meta.url);
-
-// eslint-disable-next-line
+// @ts-ignore
 self.MonacoEnvironment = {
-  getWorkerUrl: function (moduleId, label) {
-    if (label === 'json') {
-      return `${monacoDir}json.worker.js`;
+  getWorkerUrl: function (moduleId: any, label: string) {
+    if (label === "json") {
+      return "./json.worker.bundle.js";
     }
-    if (label === 'css') {
-      return `${monacoDir}css.worker.js`;
+    if (label === "css") {
+      return "./css.worker.bundle.js";
     }
-    if (label === 'html') {
-      return `${monacoDir}html.worker.js`;
+    if (label === "html") {
+      return "./html.worker.bundle.js";
     }
-    if (label === 'typescript' || label === 'javascript') {
-      return `${monacoDir}ts.worker.js`;
+    if (label === "typescript" || label === "javascript") {
+      return "./ts.worker.bundle.js";
     }
-    return `${monacoDir}editor.worker.js`;
+    return "./editor.worker.bundle.js";
   }
 };
 
 export class WCMonacoEditor extends HTMLElement {
-  static get observedAttributes () {
+  __initialized: any;
+  editor: any;
+  static get observedAttributes() {
     return ['src', 'value'];
   }
 
-  attributeChangedCallback (name, oldValue, newValue) {
+  attributeChangedCallback(name: string | number, oldValue: any, newValue: any) {
     if (!this.__initialized) { return; }
     if (oldValue !== newValue) {
+      // @ts-ignore
       this[name] = newValue;
     }
   }
 
-  get src () { return this.getAttribute('src'); }
-  set src (value) {
+  get src() { return this.getAttribute('src'); }
+  set src(value) {
+    // @ts-ignore
     this.setAttribute('src', value);
     this.setSrc();
   }
 
-  get value () { return this.editor.getValue(); }
-  set value (value) {
+  get value() { return this.editor.getValue(); }
+  set value(value) {
     this.editor.setValue(value);
   }
 
-  get tabSize () { return this.editor.getModel()._options.tabSize; }
-  set tabSize (value) {
+  get tabSize() { return this.editor.getModel()._options.tabSize; }
+  set tabSize(value) {
     this.editor.getModel().updateOptions({ tabSize: value });
   }
 
-  constructor () {
+  constructor() {
     super();
     this.__initialized = false;
     this.editor = null;
   }
 
-  async connectedCallback () {
+  async connectedCallback() {
     this.style.display = 'block';
     if (!this.id) { this.id = 'editor'; }
     if (!this.style.width) { this.style.width = '100%'; }
@@ -64,8 +66,10 @@ export class WCMonacoEditor extends HTMLElement {
 
     if (this.hasAttribute('config')) {
       const config = await this.fetchConfig(this.getAttribute('config'));
+      // @ts-ignore
       this.editor = monaco.editor.create(document.getElementById(this.id), config);
     } else {
+      // @ts-ignore
       this.editor = monaco.editor.create(document.getElementById(this.id), {
         language: this.getAttribute('language'),
         theme: 'vs-dark',
@@ -89,18 +93,20 @@ export class WCMonacoEditor extends HTMLElement {
     this.__initialized = true;
   }
 
-  async setSrc () {
+  async setSrc() {
     const src = this.getAttribute('src');
     const contents = await this.fetchSrc(src);
     this.editor.setValue(contents);
   }
 
-  async fetchSrc (src) {
+  async fetchSrc(src: string | Request | null) {
+    // @ts-ignore
     const response = await fetch(src);
     return response.text();
   }
 
-  async fetchConfig (config) {
+  async fetchConfig(config: string | Request | null) {
+    // @ts-ignore
     const response = await fetch(config);
     return response.json();
   }
