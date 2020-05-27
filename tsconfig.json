@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "None",
+        "module": "ES6",
         "target": "ES2017",
         "strict": true,
         "rootDir": "./src",

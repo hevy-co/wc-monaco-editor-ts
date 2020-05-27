@@ -4,6 +4,7 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.main.js'
 // @ts-ignore
 self.MonacoEnvironment = {
   getWorkerUrl: function (moduleId: any, label: string) {
+
     if (label === 'json') {
       return './json.worker.js';
     }

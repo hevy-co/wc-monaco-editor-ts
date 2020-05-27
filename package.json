@@ -12,15 +12,10 @@
     "monaco"
   ],
   "repository": "https://github.com/hevy-co/wc-monaco-editor-ts/",
-  "main": "index.js",
+  "module": "dist/wc-monaco-editor.js",
   "types": "types/wc-monaco-editor.d.ts",
   "scripts": {
-    "build": "npm run build-json && npm run build-css && npm run build-html && npm run build-ts && npm run build-worker",
-    "build-json": "parcel build node_modules/monaco-editor/esm/vs/language/json/json.worker.js --no-source-maps",
-    "build-css": "parcel build node_modules/monaco-editor/esm/vs/language/css/css.worker.js --no-source-maps",
-    "build-html": "parcel build node_modules/monaco-editor/esm/vs/language/html/html.worker.js --no-source-maps",
-    "build-ts": "parcel build node_modules/monaco-editor/esm/vs/language/typescript/ts.worker.js --no-source-maps",
-    "build-worker": "parcel build node_modules/monaco-editor/esm/vs/editor/editor.worker.js --no-source-maps"
+    "build": "make package"
   },
   "dependencies": {},
   "devDependencies": {
@@ -38,16 +33,5 @@
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
-  },
-  "semistandard": {
-    "parser": "babel-eslint",
-    "ignore": [
-      "demo/*",
-      "dev/*",
-      "monaco/*",
-      "src/monaco/*",
-      "index.js",
-      "index.min.js"
-    ]
   }
 }
