@@ -55,7 +55,7 @@ let indexFB = fusebox({
 let index = {
     bundles: {
         distRoot: 'dist',
-        app: { path: 'index.js' }
+        app: { path: 'wc-monaco-editor.js' }
     }
 }
 
