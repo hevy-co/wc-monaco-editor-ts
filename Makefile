@@ -8,6 +8,15 @@ build: $(DIST)
 
 rebuild: clean-dist $(DIST)
 
+package:
+	tools/parallel \
+	"npx parcel build node_modules/monaco-editor/esm/vs/language/json/json.worker.js" \
+	"npx parcel build node_modules/monaco-editor/esm/vs/language/css/css.worker.js" \
+	"npx parcel build node_modules/monaco-editor/esm/vs/language/html/html.worker.js" \
+	"npx parcel build node_modules/monaco-editor/esm/vs/language/typescript/ts.worker.js" \
+	"npx parcel build node_modules/monaco-editor/esm/vs/editor/editor.worker.js"
+
+
 clean:
 	rm -rf .cache dist node_modules
 

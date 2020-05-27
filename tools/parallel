@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# vim: set ft=bash
+##
+# parallel
+# Executes multiple commands in parallel and waits for them to finish.
+##
+VERSION=0.1.0
+
+set -euo pipefail
+[[ -n ${DEBUG:-} ]] && set -x
+
+fail() {
+  local exitCode=$1
+  if [[ $exitCode =~ ^[0-9]+$ ]]; then shift 1; else exitCode=1; fi
+  echo "ERROR: $*"
+  exit $(( exitCode ))
+}
+
+usage() {
+  echo "ERROR: $*"
+  cat << HEREDOC
+
+USAGE: $SELF COMMANDS...
+
+Runs 1+ commands in parallel. Commands are executed with sh -c
+HEREDOC
+  exit 1
+}
+
+handle_args() {
+  if (( $# == 0)); then
+    usage "Must provide at least one command"
+  fi
+  if [[ ${1:-} == --help ]]; then usage; fi
+  if [[ ${1:-} == --version ]]; then echo "$VERSION" && exit 0; fi
+}
+
+main() {
+  # Construct trap string, will look like 'kill -9 $pid1 $pid2 $pid3' etc
+  cleanup='kill -9'
+  i=0
+  for _ in "$@"; do
+    i=$(( i+1 ))
+    # shellcheck disable=SC2016
+    cleanup+=' $pid'"$i"
+  done
+
+  # Run each argument as a shell command and wait for output
+  # shellcheck disable=SC2086
+  trap '$cleanup' ERR
+  i=0
+  for arg in "$@"; do
+    i=$(( i+1 ))
+    sh -c "$arg" &
+    declare pid$i=$!
+  done
+  wait
+}
+
+handle_args "$@"
+main "$@"
