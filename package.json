@@ -17,10 +17,10 @@
   "scripts": {
     "install": "make package"
   },
-  "dependencies": {},
+  "dependencies": {
+    "monaco-editor": "^0.20.0"
+  },
   "devDependencies": {
-    "monaco-editor": "^0.20.0",
-    "monaco-editor-webpack-plugin": "^1.9.0",
     "typescript": "^3.9.3"
   }
 }
