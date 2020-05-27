@@ -1,15 +1,26 @@
 //import { fusebox } from 'fuse-box'
 let fusebox = require('fuse-box').fusebox
+let shell = require('shelljs')
 
-let jsonWorkerFB = fusebox({
+
+let NODE_MODULES = shell.exec('npm root', { silent: true }).stdout.trim()
+
+let jsonFB = fusebox({
     target: 'web-worker',
-    entry: 'node_modules/monaco-editor/esm/vs/language/json/json.worker.js',
+    entry: NODE_MODULES + '/monaco-editor/esm/vs/language/json/json.worker.js',
     watcher: false
 })
 
+let json = {
+    bundles: {
+        distRoot: 'dist',
+        app: { path: 'json.worker.js' }
+    }
+}
+
 let cssFB = fusebox({
     target: 'web-worker',
-    entry: 'node_modules/monaco-editor/esm/vs/language/css/css.worker.js',
+    entry: NODE_MODULES + '/monaco-editor/esm/vs/language/css/css.worker.js',
     watcher: false
 })
 
@@ -22,7 +33,7 @@ let css = {
 
 let htmlFB = fusebox({
     target: 'web-worker',
-    entry: 'node_modules/monaco-editor/esm/vs/language/html/html.worker.js',
+    entry: NODE_MODULES + '/monaco-editor/esm/vs/language/html/html.worker.js',
     watcher: false
 })
 
@@ -35,7 +46,7 @@ let html = {
 
 let tsFB = fusebox({
     target: 'web-worker',
-    entry: 'node_modules/monaco-editor/esm/vs/language/typescript/ts.worker.js',
+    entry: NODE_MODULES + '/monaco-editor/esm/vs/language/typescript/ts.worker.js',
     watcher: false
 })
 
@@ -43,6 +54,19 @@ let ts = {
     bundles: {
         distRoot: 'dist',
         app: { path: 'ts.worker.js' }
+    }
+}
+
+let editorFB = fusebox({
+    target: 'web-worker',
+    entry: NODE_MODULES + '/monaco-editor/esm/vs/editor/editor.worker.js',
+    watcher: false
+})
+
+let editor = {
+    bundles: {
+        distRoot: 'dist',
+        app: { path: 'editor.worker.js' }
     }
 }
 
@@ -61,7 +85,8 @@ let index = {
 
 
 indexFB.runDev(index)
-jsonWorkerFB.runDev(index)
+jsonFB.runDev(json)
 cssFB.runDev(css)
 htmlFB.runDev(html)
 tsFB.runDev(ts)
+editorFB.runDev(editor)
