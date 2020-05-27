@@ -9,7 +9,7 @@ build: $(DIST)
 
 rebuild: clean-dist $(DIST)
 
-package: component workers types
+package:# component workers types
 
 component:
 	npx parcel build src/wc-monaco-editor.ts
