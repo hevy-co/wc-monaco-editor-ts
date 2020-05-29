@@ -1,7 +1,7 @@
 //import { fusebox } from 'fuse-box'
 let fusebox = require('fuse-box').fusebox
 
-var NODE_MODULES = process.env.NODE_MODULES_PATH || "../.."
+var NODE_MODULES = process.env.PWD + "/node_modules"
 
 
 let jsonFB = fusebox({
