@@ -1,9 +1,16 @@
 //import { fusebox } from 'fuse-box'
 let fusebox = require('fuse-box').fusebox
-let shell = require('shelljs')
+let exec = require('child_process').exec;
 
+var NODE_MODULES = ""
+Promise.all([exec('npm root', function callback(error, stdout, stderr) {
+    if (error) {
+        console.error(error)
+        process.exit(error.code)
+    }
+    NODE_MODULES = stdout.trim()
+})])
 
-let NODE_MODULES = shell.exec('npm root', { silent: true }).stdout.trim()
 
 let jsonFB = fusebox({
     target: 'web-worker',
