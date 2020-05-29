@@ -15,7 +15,7 @@
   "module": "dist/wc-monaco-editor.js",
   "types": "types/wc-monaco-editor.d.ts",
   "scripts": {
-    "install": "make package"
+    "postinstall": "make package"
   },
   "dependencies": {
     "monaco-editor": "^0.20.0"
