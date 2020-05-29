@@ -1,15 +1,7 @@
 //import { fusebox } from 'fuse-box'
 let fusebox = require('fuse-box').fusebox
-let exec = require('child_process').exec;
 
-var NODE_MODULES = ""
-Promise.all([exec('npm root', function callback(error, stdout, stderr) {
-    if (error) {
-        console.error(error)
-        process.exit(error.code)
-    }
-    NODE_MODULES = stdout.trim()
-})])
+var NODE_MODULES = process.env.NODE_MODULES
 
 
 let jsonFB = fusebox({

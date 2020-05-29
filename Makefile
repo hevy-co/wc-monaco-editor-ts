@@ -10,7 +10,7 @@ build: $(DIST)
 rebuild: clean-dist $(DIST)
 
 package: types
-	node fuse.js
+	NODE_MODULES=$(shell npm root) node fuse.js
 
 types:
 	npx tsc -d --declarationDir $(TYPES) --declarationMap --emitDeclarationOnly
